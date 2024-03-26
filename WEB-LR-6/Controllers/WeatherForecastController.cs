@@ -8,24 +8,24 @@ namespace WebApplication1.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        "Freezing", "Invigorating", "Cold", "Refreshing", "Moderate", "Toasty", "Pleasant", "Sizzling", "Roasting", "Blistering"
     };
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get([FromQuery] WeatherRequest request)
         {
-            var rng = new Random();
+            var randomRange = new Random();
 			var forecasts = new List<WeatherForecast>();
 			for (int i = 0; i < request.numberOfDays; i++)
 			{
-				var temperatureC = rng.Next(request.minValue, request.maxValue);
-				var temperatureF = 32 + (int)(temperatureC / 0.5556);
+				var celsium = randomRange.Next(request.minValue, request.maxValue);
+				var farengeit = 32 + (int)(celsium / 0.555);
 				forecasts.Add(new WeatherForecast
                 {
 					Date = DateTime.Now.AddDays(i),
-					TemperatureC = temperatureC,
-					TemperatureF = temperatureF,
-					Summary = Summaries[rng.Next(Summaries.Length)]
+					tempC = celsium,
+					tempF = farengeit,
+					Summary = Summaries[randomRange.Next(Summaries.Length)]
 				});
 			}
 			return forecasts;
@@ -35,7 +35,7 @@ namespace WebApplication1.Controllers
         public string Post(WeatherForecast forecast)
         {
 
-            return "Ok, i will post tomorrow.";
+            return "Горить палає техніка ворожа";
         }
     }
 }
